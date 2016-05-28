@@ -20,4 +20,7 @@ public class Tasker {
     public boolean hasSkill(Skill desiredSkill) {
         return this.skills.contains(desiredSkill);
     }
+
+    public void sendTaskRequest(TaskOffer offer) {
+    }
 }

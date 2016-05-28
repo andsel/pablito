@@ -2,6 +2,7 @@ package org.dna.actions;
 
 import org.dna.model.Criteria;
 import org.dna.model.Tasker;
+import org.dna.model.TaskerId;
 import org.dna.model.TaskerRepository;
 import org.junit.Test;
 
@@ -22,6 +23,11 @@ public class SearchForTaskerTest {
             Tasker plumber = new Tasker();
             plumber.addSkill(PLUMBING);
             return singletonList(greenKeeper);
+        }
+
+        @Override
+        public Tasker getByID(TaskerId possibleTasker) {
+            return null;
         }
     }
 

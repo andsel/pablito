@@ -32,5 +32,6 @@ I feedback una volta dati non possono essere revocati, una volta dato è di chi 
 ========================================================
 
 Definizione di possibili Entità/Aggregati e Value objects
-**tasker**, **task bidder**, **task offer** sembrano tutti essere delle Entità allora chi è l'aggreato?
-task offer potrebbe essere il responsabile degli atlri due?
+**tasker**, **task bidder**, **task offer** sono tutti entità.
+Un aggregato potrebbe raggruppare **tasker**, **task offer** mentre l'altro 
+aggregato sarà l'entità **task bidder**
