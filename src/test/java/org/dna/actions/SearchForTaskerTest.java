@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class SearchForTaskerTest {
 
-    class InMemoryRepository implements TaskerRepository {
+    class InMemoryTaskerRepository implements TaskerRepository {
         @Override
         public List<Tasker> findAllByCriteria(Criteria<Tasker> searchCriteria) {
             Tasker greenKeeper = new Tasker();
@@ -27,7 +27,7 @@ public class SearchForTaskerTest {
 
     @Test
     public void workFlowForAction() {
-        TaskerRepository repo = new InMemoryRepository();
+        TaskerRepository repo = new InMemoryTaskerRepository();
         Criteria<Tasker> searchCriteria = new Criteria(Tasker.class).contains("skills", GREENKEEPING.toString());
         SearchForTasker sut = new SearchForTasker(repo, searchCriteria);
         List<Tasker> matchingTaskers = sut.execute();

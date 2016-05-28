@@ -1,5 +1,5 @@
 # Modello a ricerca & richiesta
-* Il **tasker** pubblica le proprie _skill_ legate al suo _profilo_, ad esempio "taglio erba", richeista monetaria per mq 
+* Il **tasker** pubblica le proprie _skill_ legate al suo _profilo_, ad esempio "taglio erba", richiesta monetaria per mq 
     ed altre informazioni utili, definisce se ha strumenti propri ( fascie orarie), comuni d'intervento (intesi come 
     area o CAP)
 * Il **task bidder** (offerente) ricerca dei tasker che facciano match per tipologia di lavoro, area, costo e feedback.
@@ -8,9 +8,9 @@
 * Una volta compiuto il task sia **tasker** che **task bidder** possono lasciare dei feedback a vicenda.
 
 ## Possibili caratteristiche delle entità (se lo sono) in gioco
-* **tasker**: skills, toolbx, zone, costo, feedback
+* **tasker**: skills, toolbox, zone, costo, feedback
 * **task bidder**: ?
-* **task*** ciò che lega il **tasker** al **task bidder** per un periodo limitato di tempo.
+* **task offer** ciò che lega il **tasker** al **task bidder** per un periodo limitato di tempo.
 NB
 I feedback una volta dati non possono essere revocati, una volta dato è di chi lo riceve ma ha un riferimento a chi lo ha dato.
 
@@ -29,3 +29,8 @@ I feedback una volta dati non possono essere revocati, una volta dato è di chi 
     stessi criteri, ma escludendo il **tasker** che ha appena rifiutato)
     3b. il **tasker** ed il **task bidder** si rilasciano feedback una volta completato il task 
     
+========================================================
+
+Definizione di possibili Entità/Aggregati e Value objects
+**tasker**, **task bidder**, **task offer** sembrano tutti essere delle Entità allora chi è l'aggreato?
+task offer potrebbe essere il responsabile degli atlri due?
