@@ -46,6 +46,8 @@ project(':web') {
 
 
 	dependencies {
+		compile project(":model")
+
 		compile('org.springframework.boot:spring-boot-starter-actuator')
 		compile('org.springframework.boot:spring-boot-starter-security')
 		compile('org.springframework.boot:spring-boot-starter-thymeleaf')
