@@ -1,21 +1,21 @@
 package org.dna.actions;
 
-import org.dna.model.Criteria;
 import org.dna.model.Tasker;
 import org.dna.model.TaskerRepository;
 
 import java.util.List;
+import java.util.Set;
 
 public class SearchForTasker {
     private final TaskerRepository taskerRepo;
-    private Criteria<Tasker> searchCriteria;
+    private Set<Tasker.Skill> desiredSkills;
 
-    SearchForTasker(TaskerRepository taskerRepo, Criteria<Tasker> searchCriteria) {
+    SearchForTasker(TaskerRepository taskerRepo, Set<Tasker.Skill> desiredSkills) {
         this.taskerRepo = taskerRepo;
-        this.searchCriteria = searchCriteria;
+        this.desiredSkills = desiredSkills;
     }
 
     public List<Tasker> execute() {
-        return this.taskerRepo.findAllByCriteria(this.searchCriteria);
+        return this.taskerRepo.findAllBySkills(this.desiredSkills);
     }
 }

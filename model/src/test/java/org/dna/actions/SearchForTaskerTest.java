@@ -1,12 +1,14 @@
 package org.dna.actions;
 
-import org.dna.model.Criteria;
 import org.dna.model.Tasker;
 import org.dna.model.TaskerId;
 import org.dna.model.TaskerRepository;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Collections.singletonList;
 import static org.dna.model.Tasker.Skill.GREENKEEPING;
@@ -17,7 +19,7 @@ public class SearchForTaskerTest {
 
     class InMemoryTaskerRepository implements TaskerRepository {
         @Override
-        public List<Tasker> findAllByCriteria(Criteria<Tasker> searchCriteria) {
+        public List<Tasker> findAllBySkills(Set<org.dna.model.Tasker.Skill> skills) {
             Tasker greenKeeper = new Tasker();
             greenKeeper.addSkill(GREENKEEPING);
             Tasker plumber = new Tasker();
@@ -34,8 +36,7 @@ public class SearchForTaskerTest {
     @Test
     public void workFlowForAction() {
         TaskerRepository repo = new InMemoryTaskerRepository();
-        Criteria<Tasker> searchCriteria = new Criteria(Tasker.class).contains("skills", GREENKEEPING.toString());
-        SearchForTasker sut = new SearchForTasker(repo, searchCriteria);
+        SearchForTasker sut = new SearchForTasker(repo, new HashSet<Tasker.Skill>(Arrays.asList(GREENKEEPING)));
         List<Tasker> matchingTaskers = sut.execute();
 
         //Verify

@@ -1,1 +1,11 @@
-/.idea
+/.idea/
+/web/build/
+/web/web.iml
+model/model.iml
+/model/build/
+/build
+/.gradle
+/gradle/
+gradlew
+gradlew.bat
+pablito.iml
