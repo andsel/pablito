@@ -1,10 +1,9 @@
 package org.dna.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /*
- * Entity
+ * Aggregate
  * */
 public class Tasker {
     public enum Skill {
@@ -12,6 +11,8 @@ public class Tasker {
     }
 
     private Set<Skill> skills = new HashSet<>();
+
+    private final List<TaskOffer> pendingOffers = new ArrayList<>();
 
     public void addSkill(Skill skill) {
         this.skills.add(skill);
@@ -21,6 +22,15 @@ public class Tasker {
         return this.skills.contains(desiredSkill);
     }
 
-    public void sendTaskRequest(TaskOffer offer) {
+    public void postTaskRequest(TaskOffer offer, TaskBidderId requester) {
+        if (!hasSkill(offer.skill)) {
+            return;
+        }
+        offer.requestedBy(requester);
+        pendingOffers.add(offer);
+    }
+
+    public List<TaskOffer> pendingRequests() {
+        return new ArrayList<>(pendingOffers);
     }
 }
