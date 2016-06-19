@@ -1,0 +1,15 @@
+security:
+  user:
+    password: password
+
+
+# Dev config
+spring:
+  devtools:
+    restart:
+      exclude: /static/**, /templates/**, /public/**
+
+# To disable thymeleaf caching
+#spring:
+#  thymeleaf:
+#    cache: false
