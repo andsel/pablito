@@ -10,10 +10,8 @@ public class AskTaskOfferConfirmation {
         this.biddersRepo = biddersRepo;
     }
 
-    public void execute(String id, TaskOffer offer) {
-        //TaskBidder bidder = biddersRepo.getByID(id);
-
-//        Tasker tasker = taskersRepo.getByID(offer.possibleTasker);
-//        tasker.postTaskRequest(offer, new TaskBidderId(id));
+    public void execute(TaskBidderId bidderId, TaskOffer offer, TaskerId possibleTasker) {
+        Tasker tasker = taskersRepo.getByID(possibleTasker);
+        tasker.postTaskRequest(offer, bidderId);
     }
 }
