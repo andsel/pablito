@@ -1,7 +1,6 @@
 package org.dna.actions;
 
 import org.dna.model.Tasker;
-import org.dna.model.TaskerId;
 import org.dna.model.TaskerRepository;
 import org.junit.Test;
 
@@ -28,7 +27,12 @@ public class SearchForTaskerTest {
         }
 
         @Override
-        public Tasker getByID(TaskerId possibleTasker) {
+        public Tasker getByID(long possibleTasker) {
+            return null;
+        }
+
+        @Override
+        public Tasker save(Tasker tasker) {
             return null;
         }
     }

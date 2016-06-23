@@ -10,9 +10,17 @@ public class Tasker {
         GREENKEEPING, PLUMBING
     }
 
+    private Long id;
+
     private Set<Skill> skills = new HashSet<>();
 
     private final List<TaskOffer> pendingOffers = new ArrayList<>();
+
+    public Tasker() {}
+
+    public Long getId() {
+        return this.id;
+    }
 
     public void addSkill(Skill skill) {
         this.skills.add(skill);
@@ -22,11 +30,11 @@ public class Tasker {
         return this.skills.contains(desiredSkill);
     }
 
-    public void postTaskRequest(TaskOffer offer, TaskBidderId requester) {
+    public void postTaskRequest(TaskOffer offer, long taskRquesterId) {
         if (!hasSkill(offer.skill)) {
             return;
         }
-        offer.requestedBy(requester);
+        offer.requestedBy(taskRquesterId);
         pendingOffers.add(offer);
     }
 
