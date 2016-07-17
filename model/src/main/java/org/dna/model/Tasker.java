@@ -11,15 +11,22 @@ public class Tasker {
     }
 
     private Long id;
-
+    private String name;
     private Set<Skill> skills = new HashSet<>();
-
     private final List<TaskOffer> pendingOffers = new ArrayList<>();
 
-    public Tasker() {}
+    private Tasker() {}
+
+    public Tasker(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return this.id;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public void addSkill(Skill skill) {

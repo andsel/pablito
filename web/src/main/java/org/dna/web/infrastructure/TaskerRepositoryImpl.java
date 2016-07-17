@@ -18,7 +18,7 @@ public class TaskerRepositoryImpl implements TaskerRepository {
 
     @Override
     public List<Tasker> findAllBySkills(Set<Tasker.Skill> skills) {
-        return null;
+        return this.taskerDAO.findAll();
     }
 
     @Override
