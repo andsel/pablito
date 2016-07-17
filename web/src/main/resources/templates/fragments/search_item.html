@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div th:fragment="footer">
+    <p>&copy; 2015 Company, Inc.</p>
+</div>
+<div class="row" th:fragment="item">
+    <!--<div class="col-md-2"></div>-->
+    <div class="col-xs-4 col-md-2">
+        <a href="#" class="thumbnail">
+            <img data-holder-rendered="true"
+                 src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTU1YWFmMTk3OTMgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTVhYWYxOTc5MyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MSIgeT0iOTQuOCI+MTcxeDE4MDwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="
+                 style="height: 180px; width: 100%; display: block;" data-src="holder.js/100%x180" alt="100%x180"/>
+        </a>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="tasker_detail.html"><b><span th:text="${tasker.name}"/></b></a> Glass cleaning</h3>
+            </div>
+            <div class="panel-body">
+                Nulllam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
+                parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+
+                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+                ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat
+                porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor
+                fringilla. <a class="btn btn-default" href="tasker_detail.html" role="button">...</a>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th><p class="text-left"><b>Trento, IT</b></p></th>
+                    <th><p class="text-right">20 euro / ora</p></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+</body>
+</html>
