@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -25,8 +28,6 @@
 </head>
 
 <body>
-
-
 <header th:replace="fragments/header :: header" class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -90,6 +91,8 @@
                          style="height: 180px; width: 100%; display: block;" data-src="holder.js/100%x180" alt="100%x180"/>
                 </a>
             </div>
+
+            <!--Just for layout template-->
             <div class="col-md-8">
                 <div class="panel panel-info">
                     <div class="panel-heading">

@@ -19,9 +19,9 @@ public class SearchForTaskerTest {
     class InMemoryTaskerRepository implements TaskerRepository {
         @Override
         public List<Tasker> findAllBySkills(Set<org.dna.model.Tasker.Skill> skills) {
-            Tasker greenKeeper = new Tasker("Mario");
+            Tasker greenKeeper = new Tasker("Mario", "Gardening", "Trento", "IT");
             greenKeeper.addSkill(GREENKEEPING);
-            Tasker plumber = new Tasker("Giovanna");
+            Tasker plumber = new Tasker("Giovanna", "Glass cleaning", "Trento", "IT");
             plumber.addSkill(PLUMBING);
             return singletonList(greenKeeper);
         }

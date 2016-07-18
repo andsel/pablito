@@ -11,7 +11,7 @@ public class TaskerTest {
 
     @Before
     public void setUp() {
-        sut = new Tasker("Mario");
+        sut = new Tasker("Mario", "Gardening", "Trento", "IT");
         sut.addSkill(Tasker.Skill.GREENKEEPING);
     }
 
