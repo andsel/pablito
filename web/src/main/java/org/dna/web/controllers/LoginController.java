@@ -5,7 +5,10 @@ import org.dna.model.TaskerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,4 +34,16 @@ public class LoginController {
         return "search";
     }
 
+
+    @RequestMapping(value="/tasker/{taskerId}/details")
+    public String detail(@PathVariable("taskerId") long taskerId, Model model) {
+        Tasker tasker = this.taskerRepository.getByID(taskerId);
+        model.addAttribute("tasker", tasker);
+        return "tasker_detail";
+    }
+
+    @RequestMapping(value="/tasker/{taskerId}/hire", method = RequestMethod.GET)
+    public String preHire(@PathVariable("taskerId") long taskerId, Model model) {
+        return "hire_tasker";
+    }
 }

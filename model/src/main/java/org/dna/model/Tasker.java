@@ -19,7 +19,7 @@ public class Tasker {
     private Set<Skill> skills = new HashSet<>();
     private final List<TaskOffer> pendingOffers = new ArrayList<>();
 
-    private Tasker() {}
+    protected Tasker() {}
 
     public Tasker(String name, String mainSkill, String city, String nation) {
         this.name = name;
