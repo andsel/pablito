@@ -3,6 +3,7 @@ package org.dna.web.infrastructure;
 import org.dna.model.Tasker;
 import org.dna.model.TaskerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Set;
@@ -18,7 +19,8 @@ public class TaskerRepositoryImpl implements TaskerRepository {
 
     @Override
     public List<Tasker> findAllBySkills(Set<Tasker.Skill> skills) {
-        return this.taskerDAO.findAll();
+        PageRequest paging = new PageRequest(0, 10);
+        return this.taskerDAO.findAll(paging).getContent();
     }
 
     @Override

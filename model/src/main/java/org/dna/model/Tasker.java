@@ -64,11 +64,11 @@ public class Tasker {
         return this.skills.contains(desiredSkill);
     }
 
-    public void postTaskRequest(TaskOffer offer, long taskRquesterId) {
+    public void postTaskRequest(TaskOffer offer, long taskRequesterId) {
         if (!hasSkill(offer.skill)) {
             return;
         }
-        offer.requestedBy(taskRquesterId);
+        offer.requestedBy(taskRequesterId);
         pendingOffers.add(offer);
     }
 
