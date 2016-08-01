@@ -2,6 +2,7 @@
 <!--<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -84,9 +85,12 @@
 
                     <span class="badge">25</span>
 
-                    <a class="btn btn-default" href="hire_tasker.html"
-                       th:href="@{/tasker/{taskerId}/hire(taskerId=${tasker.id})}"
-                       role="button">Hire <span th:text="${tasker.name}"/></a>
+                    <!--<div sec:authorize="isAuthenticated()">-->
+                        <a class="btn btn-default" href="hire_tasker.html"
+                           sec:authorize="${isAuthenticated()}"
+                           th:href="@{/tasker/{taskerId}/hire(taskerId=${tasker.id})}"
+                           role="button">Hire <span th:text="${tasker.name}"/></a>
+                    <!--</div>-->
                 </div>
             </div>
         </div>

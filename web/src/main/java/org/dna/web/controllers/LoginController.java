@@ -34,6 +34,13 @@ public class LoginController {
         return "search";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
+        //here come after the POST /logout, gets a redirect to here, present
+        LOG.debug("Reached login GET");
+        return "login";
+    }
+
     @RequestMapping(value = "/tasker/{taskerId}/details")
     public String detail(@PathVariable("taskerId") long taskerId, Model model) {
         Tasker tasker = this.taskerRepository.getByID(taskerId);
