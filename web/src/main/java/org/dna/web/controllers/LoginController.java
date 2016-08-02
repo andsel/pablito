@@ -26,8 +26,13 @@ public class LoginController {
     @Autowired
     TaskerRepository taskerRepository;
 
+    @RequestMapping(value = "/")
+    public String index() {
+        return "index";
+    }
+
     @RequestMapping(value = "/search")
-    public String index(Model model) {
+    public String search(Model model) {
         Set<Tasker.Skill> desiredSkills = new HashSet<>(asList(Tasker.Skill.GREENKEEPING));
         List<Tasker> taskers = this.taskerRepository.findAllBySkills(desiredSkills);
         model.addAttribute("taskers", taskers);

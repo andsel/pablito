@@ -1,12 +1,18 @@
 package org.dna;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by andrea on 28/07/16.
@@ -15,13 +21,28 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        //This auth success handler is a customization to use referrer only
+        //for navbar login, to stay on the same page.
+        SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler() {
+            protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response) {
+                boolean useReferToIncomingPage = !request.getRequestURI().endsWith("/login") ||
+                        request.getParameterValues("_fromLoginPage") == null;
+                setUseReferer(useReferToIncomingPage);
+                return super.determineTargetUrl(request, response);
+            }
+        };
+        return handler;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .loginPage("/login")
+                .successHandler(successHandler())
             .and()
                 .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
             .and()
                 .authorizeRequests()
