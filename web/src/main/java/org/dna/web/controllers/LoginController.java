@@ -1,5 +1,6 @@
 package org.dna.web.controllers;
 
+import org.dna.model.SkillType;
 import org.dna.model.TaskOffer;
 import org.dna.model.Tasker;
 import org.dna.model.TaskerRepository;
@@ -9,13 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 
 @Controller
@@ -32,8 +35,20 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/search")
-    public String search(Model model) {
-        Set<Tasker.Skill> desiredSkills = new HashSet<>(asList(Tasker.Skill.GREENKEEPING));
+    public String search(@RequestParam(value="location", required=false) String location,
+                         @RequestParam(value="expertise", required=false) String expertise,
+                         Model model) {
+        SkillType desiredSkill = SkillType.ANY_SKILL;
+        if (!StringUtils.isEmpty(expertise)) {
+            try {
+                desiredSkill = SkillType.valueOf(expertise.toUpperCase());
+            } catch (IllegalArgumentException iae) {
+                //TODO present the user with an error
+                LOG.debug("User choose invalid skill type");
+            }
+        }
+
+        Set<SkillType> desiredSkills = new HashSet<>(singletonList(desiredSkill));
         List<Tasker> taskers = this.taskerRepository.findAllBySkills(desiredSkills);
         model.addAttribute("taskers", taskers);
         return "search";
@@ -67,7 +82,7 @@ public class LoginController {
                              Model model) {
         LOG.info("taskHire {}", taskHire);
         Tasker tasker = this.taskerRepository.getByID(taskerId);
-        TaskOffer offer = new TaskOffer(Tasker.Skill.GREENKEEPING); //TODO read from TaskerHireRequest
+        TaskOffer offer = new TaskOffer(SkillType.GREENKEEPING); //TODO read from TaskerHireRequest
         tasker.postTaskRequest(offer, 1L); //TODO load the id from the session user
         this.taskerRepository.save(tasker);
         return "redirect:/search";
