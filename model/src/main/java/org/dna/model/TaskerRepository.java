@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface TaskerRepository {
-    List<Tasker> findAllBySkills(Set<Tasker.Skill> skills);
+    List<Tasker> findAllBySkills(Set<SkillType> skills);
 
     Tasker getByID(long possibleTasker);
 

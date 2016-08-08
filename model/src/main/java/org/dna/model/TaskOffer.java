@@ -2,9 +2,9 @@ package org.dna.model;
 
 public class TaskOffer {
     private long taskRequesterId;
-    final Tasker.Skill skill;
+    final SkillType skill;
 
-    public TaskOffer(Tasker.Skill skill) {
+    public TaskOffer(SkillType skill) {
         this.skill = skill;
     }
 

@@ -6,17 +6,13 @@ import java.util.*;
  * Aggregate
  * */
 public class Tasker {
-    public enum Skill {
-        GREENKEEPING, PLUMBING
-    }
-
     private Long id;
     private String name;
     private String mainSkill;
     private String city;
     private String nation;
     private String presentation;
-    private Set<Skill> skills = new HashSet<>();
+    private Set<SkillType> skills = new HashSet<>();
     private final List<TaskOffer> pendingOffers = new ArrayList<>();
 
     protected Tasker() {}
@@ -56,11 +52,11 @@ public class Tasker {
         this.presentation = presentation;
     }
 
-    public void addSkill(Skill skill) {
+    public void addSkill(SkillType skill) {
         this.skills.add(skill);
     }
 
-    public boolean hasSkill(Skill desiredSkill) {
+    public boolean hasSkill(SkillType desiredSkill) {
         return this.skills.contains(desiredSkill);
     }
 

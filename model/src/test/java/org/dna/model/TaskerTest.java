@@ -12,12 +12,12 @@ public class TaskerTest {
     @Before
     public void setUp() {
         sut = new Tasker("Mario", "Gardening", "Trento", "IT");
-        sut.addSkill(Tasker.Skill.GREENKEEPING);
+        sut.addSkill(SkillType.GREENKEEPING);
     }
 
     @Test
     public void testRequestForTask() {
-        TaskOffer offer = new TaskOffer(Tasker.Skill.GREENKEEPING);
+        TaskOffer offer = new TaskOffer(SkillType.GREENKEEPING);
         sut.postTaskRequest(offer, 1L);
 
         assertEquals(1, sut.pendingRequests().size());
@@ -25,7 +25,7 @@ public class TaskerTest {
 
     @Test
     public void testCantRequestForTaskWithoutMatchingSkill() {
-        TaskOffer offer = new TaskOffer(Tasker.Skill.PLUMBING);
+        TaskOffer offer = new TaskOffer(SkillType.PLUMBING);
         sut.postTaskRequest(offer, 1L);
 
         assertTrue("A PLUMBING tasker can't be presented with requesting GREENKEEPING skills",
@@ -34,7 +34,7 @@ public class TaskerTest {
 
     @Test
     public void testSkills() {
-        assertTrue(sut.hasSkill(Tasker.Skill.GREENKEEPING));
-        assertFalse(sut.hasSkill(Tasker.Skill.PLUMBING));
+        assertTrue(sut.hasSkill(SkillType.GREENKEEPING));
+        assertFalse(sut.hasSkill(SkillType.PLUMBING));
     }
 }

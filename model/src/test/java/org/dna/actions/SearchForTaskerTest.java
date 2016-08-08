@@ -1,5 +1,6 @@
 package org.dna.actions;
 
+import org.dna.model.SkillType;
 import org.dna.model.Tasker;
 import org.dna.model.TaskerRepository;
 import org.junit.Test;
@@ -10,15 +11,15 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.Collections.singletonList;
-import static org.dna.model.Tasker.Skill.GREENKEEPING;
-import static org.dna.model.Tasker.Skill.PLUMBING;
+import static org.dna.model.SkillType.GREENKEEPING;
+import static org.dna.model.SkillType.PLUMBING;
 import static org.junit.Assert.*;
 
 public class SearchForTaskerTest {
 
     class InMemoryTaskerRepository implements TaskerRepository {
         @Override
-        public List<Tasker> findAllBySkills(Set<org.dna.model.Tasker.Skill> skills) {
+        public List<Tasker> findAllBySkills(Set<SkillType> skills) {
             Tasker greenKeeper = new Tasker("Mario", "Gardening", "Trento", "IT");
             greenKeeper.addSkill(GREENKEEPING);
             Tasker plumber = new Tasker("Giovanna", "Glass cleaning", "Trento", "IT");
