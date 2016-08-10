@@ -26,7 +26,7 @@ public class TaskerRepositoryImpl implements TaskerRepository {
         if (CollectionUtils.isEmpty(skills)) {
             return this.taskerDAO.findAll(paging).getContent();
         }
-        //TODO find by skills, query Hibernate? by now use just the first
+        //TODO use all skills, not just the first one
         SkillType skill = skills.iterator().next();
         return this.taskerDAO.findBySkillsContaining(skill, paging).getContent();
     }

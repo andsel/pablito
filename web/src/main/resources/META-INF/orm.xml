@@ -21,7 +21,6 @@
                 </collection-table>
             </element-collection>
             <embedded name="pendingOffers"/>
-            <!--<embedded name="skills"/>-->
         </attributes>
     </entity>
 
