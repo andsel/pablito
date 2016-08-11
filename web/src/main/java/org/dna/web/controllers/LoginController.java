@@ -8,6 +8,11 @@ import org.dna.web.model.TaskerHireRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -59,15 +64,10 @@ public class LoginController {
         int offset = pOffset == null ? PAGE_SIZE : pOffset;
         List<Tasker> taskers = this.taskerRepository.findAllBySkills(desiredSkills, max, offset);
         long total = this.taskerRepository.countAllBySkills(desiredSkills);
-
-        //TODO return a Page instance and update also the view
-        model.addAttribute("taskers", taskers);
-        model.addAttribute("total", total);
-        int pages = (int) Math.ceil((double)total / offset);
-        model.addAttribute("totalPages", pages);
         int current = (int) Math.floor((double)max / offset);
-        model.addAttribute("current", current);
-        model.addAttribute("size", offset);
+        Pageable pageRequest = new PageRequest(current, offset);
+        Page<Tasker> page = new PageImpl<>(taskers, pageRequest, total);
+        model.addAttribute("page", page);
         return "search";
     }
 

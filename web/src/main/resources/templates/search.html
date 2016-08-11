@@ -83,7 +83,7 @@
         </div>
     </div>
 
-    <div th:each="tasker : ${taskers}">
+    <div th:each="tasker : ${page.content}">
         <div class="row" th:replace="fragments/search_item :: item">
             <!--<div class="col-md-2"></div>-->
             <div class="col-xs-4 col-md-2">
@@ -124,33 +124,33 @@
     </div>
 
     <!--If more than one page, require pagination-->
-    <div class="row" th:if="${totalPages gt 1}">
+    <div class="row" th:if="${page.totalPages gt 1}">
         <nav class="text-center">
             <!--TODO extract in template fragment to be reusable and use Page instance-->
             <ul class="pagination">
-                <li th:class="${current eq 0} ? 'disabled' : ''">
-                    <a th:if="${current eq 0}"
+                <li th:class="${page.number eq 0} ? 'disabled' : ''">
+                    <a th:if="${page.number eq 0}"
                        href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                    <a th:if="${current ne 0}"
-                       th:href="@{${'/search'}(max=${(current-1) * size},offset=${size})}" aria-label="Previous">
+                    <a th:if="${page.number ne 0}"
+                       th:href="@{${'/search'}(max=${(page.number-1) * page.size},offset=${page.size})}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span></a>
                 </li>
-                <li th:each="pageNo : ${#numbers.sequence(0, totalPages - 1)}"
-                    th:class="${current eq pageNo}? 'active' : ''">
-                    <a th:if="${current  eq pageNo}" href="#">
+                <li th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1)}"
+                    th:class="${page.number eq pageNo}? 'active' : ''">
+                    <a th:if="${page.number  eq pageNo}" href="#">
                         <span th:text="${pageNo + 1}">1</span>
                         <span class="sr-only">(current)</span>
                     </a>
-                    <a th:if="${current ne pageNo}"
-                       th:href="@{${'/search'}(max=${(pageNo) * size},offset=${size})}">
+                    <a th:if="${page.number ne pageNo}"
+                       th:href="@{${'/search'}(max=${(pageNo) * page.size},offset=${page.size})}">
                         <span th:text="${pageNo + 1}"></span>
                     </a>
                 </li>
-                <li th:class="${current + 1 ge totalPages} ? 'disabled' : ''">
-                    <a th:if="${current + 1 ge totalPages}"
+                <li th:class="${page.number + 1 ge page.totalPages} ? 'disabled' : ''">
+                    <a th:if="${page.number + 1 ge page.totalPages}"
                        href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-                    <a th:if="${current + 1 lt totalPages}"
-                       th:href="@{${'/search'}(max=${(current+1) * size},offset=${size})}" aria-label="Next">
+                    <a th:if="${page.number + 1 lt page.totalPages}"
+                       th:href="@{${'/search'}(max=${(page.number+1) * page.size},offset=${page.size})}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

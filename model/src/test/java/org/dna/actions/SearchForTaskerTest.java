@@ -20,6 +20,11 @@ public class SearchForTaskerTest {
     class InMemoryTaskerRepository implements TaskerRepository {
         @Override
         public List<Tasker> findAllBySkills(Set<SkillType> skills) {
+            return findAllBySkills(skills, 0, 10);
+        }
+
+        @Override
+        public List<Tasker> findAllBySkills(Set<SkillType> skills, long max, int offset) {
             Tasker greenKeeper = new Tasker("Mario", "Gardening", "Trento", "IT");
             greenKeeper.addSkill(GREENKEEPING);
             Tasker plumber = new Tasker("Giovanna", "Glass cleaning", "Trento", "IT");
