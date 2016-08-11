@@ -28,6 +28,11 @@ public class SearchForTaskerTest {
         }
 
         @Override
+        public long countAllBySkills(Set<SkillType> desiredSkills) {
+            return 1;
+        }
+
+        @Override
         public Tasker getByID(long possibleTasker) {
             return null;
         }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -22,13 +21,28 @@ public class TaskerRepositoryImpl implements TaskerRepository {
 
     @Override
     public List<Tasker> findAllBySkills(Set<SkillType> skills) {
-        PageRequest paging = new PageRequest(0, 10);
+        return findAllBySkills(skills, 0, 10);
+    }
+
+    @Override
+    public List<Tasker> findAllBySkills(Set<SkillType> skills, long max, int offset) {
+        PageRequest paging = new PageRequest((int)max/offset, offset);
         if (CollectionUtils.isEmpty(skills)) {
             return this.taskerDAO.findAll(paging).getContent();
         }
         //TODO use all skills, not just the first one
         SkillType skill = skills.iterator().next();
         return this.taskerDAO.findBySkillsContaining(skill, paging).getContent();
+    }
+
+    @Override
+    public long countAllBySkills(Set<SkillType> skills) {
+        if (CollectionUtils.isEmpty(skills)) {
+            return this.taskerDAO.count();
+        }
+        //TODO use all skills, not just the first one
+        SkillType skill = skills.iterator().next();
+        return this.taskerDAO.countBySkillsContaining(skill);
     }
 
     @Override

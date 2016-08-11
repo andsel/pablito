@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 interface JPATaskerDAO extends JpaRepository<Tasker, Long> {
 
     Page<Tasker> findBySkillsContaining(SkillType skill, Pageable pageable);
+
+    long countBySkillsContaining(SkillType skill);
 }

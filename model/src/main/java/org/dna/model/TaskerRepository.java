@@ -6,6 +6,10 @@ import java.util.Set;
 public interface TaskerRepository {
     List<Tasker> findAllBySkills(Set<SkillType> skills);
 
+    List<Tasker> findAllBySkills(Set<SkillType> skills, long max, int offset);
+
+    long countAllBySkills(Set<SkillType> desiredSkills);
+
     Tasker getByID(long possibleTasker);
 
     Tasker save(Tasker tasker);

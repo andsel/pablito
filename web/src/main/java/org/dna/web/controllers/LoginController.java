@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ import static java.util.Collections.singletonList;
 public class LoginController {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
+    private static final int PAGE_SIZE = 10;
 
     @Autowired
     TaskerRepository taskerRepository;
@@ -36,6 +38,9 @@ public class LoginController {
     @RequestMapping(value = "/search")
     public String search(@RequestParam(value="location", required=false) String location,
                          @RequestParam(value="expertise", required=false) String expertise,
+                         @RequestParam(value="max", required=false) Integer pMax,
+                         @RequestParam(value="offset", required=false) Integer pOffset,
+                         //Add max and offset
                          Model model) {
         SkillType desiredSkill = SkillType.ANY_SKILL;
         if (!StringUtils.isEmpty(expertise)) {
@@ -47,9 +52,22 @@ public class LoginController {
             }
         }
 
-        Set<SkillType> desiredSkills = new HashSet<>(singletonList(desiredSkill));
-        List<Tasker> taskers = this.taskerRepository.findAllBySkills(desiredSkills);
+        Set<SkillType> desiredSkills = desiredSkill == SkillType.ANY_SKILL ?
+                Collections.emptySet() :
+                new HashSet<>(singletonList(desiredSkill));
+        long max = pMax == null ? 0 : pMax;
+        int offset = pOffset == null ? PAGE_SIZE : pOffset;
+        List<Tasker> taskers = this.taskerRepository.findAllBySkills(desiredSkills, max, offset);
+        long total = this.taskerRepository.countAllBySkills(desiredSkills);
+
+        //TODO return a Page instance and update also the view
         model.addAttribute("taskers", taskers);
+        model.addAttribute("total", total);
+        int pages = (int) Math.ceil((double)total / offset);
+        model.addAttribute("totalPages", pages);
+        int current = (int) Math.floor((double)max / offset);
+        model.addAttribute("current", current);
+        model.addAttribute("size", offset);
         return "search";
     }
 
