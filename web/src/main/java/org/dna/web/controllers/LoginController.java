@@ -5,6 +5,7 @@ import org.dna.model.TaskOffer;
 import org.dna.model.Tasker;
 import org.dna.model.TaskerRepository;
 import org.dna.web.model.TaskerHireRequest;
+import org.dna.web.model.TaskerView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.Collections.singletonList;
+import static org.dna.web.model.TaskerView.toView;
 
 
 @Controller
@@ -66,7 +68,7 @@ public class LoginController {
         long total = this.taskerRepository.countAllBySkillsAndLocation(desiredSkills, location);
         int current = (int) Math.floor((double)max / offset);
         Pageable pageRequest = new PageRequest(current, offset);
-        Page<Tasker> page = new PageImpl<>(taskers, pageRequest, total);
+        Page<TaskerView> page = new PageImpl<>(toView(taskers), pageRequest, total);
         model.addAttribute("page", page);
         model.addAttribute("expertise", expertise);
         model.addAttribute("location", location);
@@ -83,7 +85,7 @@ public class LoginController {
     @RequestMapping(value = "/tasker/{taskerId}/details")
     public String detail(@PathVariable("taskerId") long taskerId, Model model) {
         Tasker tasker = this.taskerRepository.getByID(taskerId);
-        model.addAttribute("tasker", tasker);
+        model.addAttribute("tasker", new TaskerView(tasker));
         return "tasker_detail";
     }
 

@@ -15,6 +15,8 @@ public class Tasker {
     private Set<SkillType> skills = new HashSet<>();
     private final List<TaskOffer> pendingOffers = new ArrayList<>();
 
+    private Feedback feedback = new Feedback(0, 0.0);
+
     protected Tasker() {}
 
     public Tasker(String name, String mainSkill, String location, String nation) {
@@ -46,6 +48,14 @@ public class Tasker {
 
     public String getNation() {
         return nation;
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
     }
 
     public void setPresentation(String presentation) {

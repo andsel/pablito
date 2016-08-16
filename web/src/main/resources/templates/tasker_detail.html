@@ -77,13 +77,28 @@
                     <span th:text="${tasker.presentation}"/>
                 </div>
                 <div class="panel-footer">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                    <span th:if="${tasker.feedbackRank gt 0 and tasker.feedbackRank lt 5}">
+                        <span th:each="pageNo : ${#numbers.sequence(1, tasker.feedbackRank)}"
+                              class="glyphicon glyphicon-star"
+                              aria-hidden="true"></span>
+                        <span th:each="pageNo : ${#numbers.sequence(tasker.feedbackRank + 1, 5)}"
+                              class="glyphicon glyphicon-star-empty"
+                              aria-hidden="true"></span>
+                    </span>
+                    <span th:if="${tasker.feedbackRank eq 0}">
+                        <span th:each="pageNo : ${#numbers.sequence(1, 5)}"
+                              class="glyphicon glyphicon-star-empty"
+                              aria-hidden="true"></span>
+                    </span>
+                    <span th:if="${tasker.feedbackRank eq 5}">
+                        <span th:each="pageNo : ${#numbers.sequence(1, 5)}"
+                              class="glyphicon glyphicon-star"
+                              aria-hidden="true"></span>
+                    </span>
 
-                    <span class="badge">25</span>
+
+
+                    <span class="badge" th:text="${tasker.feedbackRank}"></span>
 
                     <!--<div sec:authorize="isAuthenticated()">-->
                         <a class="btn btn-default" href="hire_tasker.html"

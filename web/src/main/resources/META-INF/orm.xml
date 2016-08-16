@@ -21,6 +21,7 @@
                 </collection-table>
             </element-collection>
             <embedded name="pendingOffers"/>
+            <embedded name="feedback"/>
         </attributes>
     </entity>
 
@@ -28,6 +29,13 @@
         <attributes>
             <basic name="taskRequesterId"/>
             <basic name="skill"/>
+        </attributes>
+    </embeddable>
+
+    <embeddable class="org.dna.model.Feedback">
+        <attributes>
+            <basic name="count"/>
+            <basic name="rank"/>
         </attributes>
     </embeddable>
 </entity-mappings>
