@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 public interface TaskerRepository {
-    List<Tasker> findAllBySkills(Set<SkillType> skills);
+    List<Tasker> findAllBySkillsAndLocation(Set<SkillType> skills, String location, long max, int offset);
 
-    List<Tasker> findAllBySkills(Set<SkillType> skills, long max, int offset);
-
-    long countAllBySkills(Set<SkillType> desiredSkills);
+    long countAllBySkillsAndLocation(Set<SkillType> desiredSkills, String location);
 
     Tasker getByID(long possibleTasker);
 

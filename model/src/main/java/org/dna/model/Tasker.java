@@ -9,7 +9,7 @@ public class Tasker {
     private Long id;
     private String name;
     private String mainSkill;
-    private String city;
+    private String location;
     private String nation;
     private String presentation;
     private Set<SkillType> skills = new HashSet<>();
@@ -17,10 +17,10 @@ public class Tasker {
 
     protected Tasker() {}
 
-    public Tasker(String name, String mainSkill, String city, String nation) {
+    public Tasker(String name, String mainSkill, String location, String nation) {
         this.name = name;
         this.mainSkill = mainSkill;
-        this.city = city;
+        this.location = location;
         this.nation = nation;
     }
 
@@ -40,8 +40,8 @@ public class Tasker {
         return presentation;
     }
 
-    public String getCity() {
-        return city;
+    public String getLocation() {
+        return location;
     }
 
     public String getNation() {

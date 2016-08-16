@@ -18,13 +18,9 @@ import static org.junit.Assert.*;
 public class SearchForTaskerTest {
 
     class InMemoryTaskerRepository implements TaskerRepository {
-        @Override
-        public List<Tasker> findAllBySkills(Set<SkillType> skills) {
-            return findAllBySkills(skills, 0, 10);
-        }
 
         @Override
-        public List<Tasker> findAllBySkills(Set<SkillType> skills, long max, int offset) {
+        public List<Tasker> findAllBySkillsAndLocation(Set<SkillType> skills, String location, long max, int offset) {
             Tasker greenKeeper = new Tasker("Mario", "Gardening", "Trento", "IT");
             greenKeeper.addSkill(GREENKEEPING);
             Tasker plumber = new Tasker("Giovanna", "Glass cleaning", "Trento", "IT");
@@ -33,7 +29,7 @@ public class SearchForTaskerTest {
         }
 
         @Override
-        public long countAllBySkills(Set<SkillType> desiredSkills) {
+        public long countAllBySkillsAndLocation(Set<SkillType> desiredSkills, String location) {
             return 1;
         }
 

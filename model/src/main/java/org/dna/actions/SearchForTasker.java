@@ -17,6 +17,6 @@ public class SearchForTasker {
     }
 
     public List<Tasker> execute() {
-        return this.taskerRepo.findAllBySkills(this.desiredSkills);
+        return this.taskerRepo.findAllBySkillsAndLocation(this.desiredSkills, null, 0, 10);
     }
 }

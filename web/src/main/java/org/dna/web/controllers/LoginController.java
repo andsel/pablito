@@ -62,12 +62,14 @@ public class LoginController {
                 new HashSet<>(singletonList(desiredSkill));
         long max = pMax == null ? 0 : pMax;
         int offset = pOffset == null ? PAGE_SIZE : pOffset;
-        List<Tasker> taskers = this.taskerRepository.findAllBySkills(desiredSkills, max, offset);
-        long total = this.taskerRepository.countAllBySkills(desiredSkills);
+        List<Tasker> taskers = this.taskerRepository.findAllBySkillsAndLocation(desiredSkills, location, max, offset);
+        long total = this.taskerRepository.countAllBySkillsAndLocation(desiredSkills, location);
         int current = (int) Math.floor((double)max / offset);
         Pageable pageRequest = new PageRequest(current, offset);
         Page<Tasker> page = new PageImpl<>(taskers, pageRequest, total);
         model.addAttribute("page", page);
+        model.addAttribute("expertise", expertise);
+        model.addAttribute("location", location);
         return "search";
     }
 

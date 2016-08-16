@@ -20,29 +20,24 @@ public class TaskerRepositoryImpl implements TaskerRepository {
     }
 
     @Override
-    public List<Tasker> findAllBySkills(Set<SkillType> skills) {
-        return findAllBySkills(skills, 0, 10);
-    }
-
-    @Override
-    public List<Tasker> findAllBySkills(Set<SkillType> skills, long max, int offset) {
+    public List<Tasker> findAllBySkillsAndLocation(Set<SkillType> skills, String location, long max, int offset) {
         PageRequest paging = new PageRequest((int)max/offset, offset);
         if (CollectionUtils.isEmpty(skills)) {
             return this.taskerDAO.findAll(paging).getContent();
         }
         //TODO use all skills, not just the first one
         SkillType skill = skills.iterator().next();
-        return this.taskerDAO.findBySkillsContaining(skill, paging).getContent();
+        return this.taskerDAO.findBySkillsContainingAndLocation(skill, location, paging).getContent();
     }
 
     @Override
-    public long countAllBySkills(Set<SkillType> skills) {
+    public long countAllBySkillsAndLocation(Set<SkillType> skills, String location) {
         if (CollectionUtils.isEmpty(skills)) {
             return this.taskerDAO.count();
         }
         //TODO use all skills, not just the first one
         SkillType skill = skills.iterator().next();
-        return this.taskerDAO.countBySkillsContaining(skill);
+        return this.taskerDAO.countBySkillsContainingAndLocation(skill, location);
     }
 
     @Override
