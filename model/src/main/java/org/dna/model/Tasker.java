@@ -14,8 +14,10 @@ public class Tasker {
     private String presentation;
     private Set<SkillType> skills = new HashSet<>();
     private final List<TaskOffer> pendingOffers = new ArrayList<>();
+    private final Set<Competence> competences = new HashSet<>();
+    private final Set<Ability> abilities = new HashSet<>();
 
-    private Feedback feedback = new Feedback(0, 0.0);
+    private FeedbackSummary feedback = new FeedbackSummary(0, 0.0);
 
     protected Tasker() {}
 
@@ -50,11 +52,11 @@ public class Tasker {
         return nation;
     }
 
-    public Feedback getFeedback() {
+    public FeedbackSummary getFeedback() {
         return feedback;
     }
 
-    public void setFeedback(Feedback feedback) {
+    public void setFeedback(FeedbackSummary feedback) {
         this.feedback = feedback;
     }
 
@@ -64,6 +66,22 @@ public class Tasker {
 
     public void addSkill(SkillType skill) {
         this.skills.add(skill);
+    }
+
+    public void addCompetence(Competence competence) {
+        this.competences.add(competence);
+    }
+
+    public Set<Competence> getCompetences() {
+        return competences;
+    }
+
+    public void addAbility(Ability ability) {
+        this.abilities.add(ability);
+    }
+
+    public Set<Ability> getAbilities() {
+        return abilities;
     }
 
     public boolean hasSkill(SkillType desiredSkill) {

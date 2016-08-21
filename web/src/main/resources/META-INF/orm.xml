@@ -7,7 +7,7 @@
     <description>Pablito XML JPA mappings</description>
     <package>org.dna.model</package>
     <entity class="org.dna.model.Tasker" name="Tasker" access="FIELD">
-        <table name="TASKERS"/>
+        <table name="TASKER"/>
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
@@ -20,6 +20,13 @@
                     <join-column name="SKILL_ID"/>
                 </collection-table>
             </element-collection>
+            <element-collection name="abilities" target-class="org.dna.model.Ability">
+                <collection-table name="ABILITY"/>
+            </element-collection>
+            <element-collection name="competences" target-class="org.dna.model.Competence">
+                <collection-table name="COMPETENCE"/>
+            </element-collection>
+
             <embedded name="pendingOffers"/>
             <embedded name="feedback"/>
         </attributes>
@@ -32,10 +39,24 @@
         </attributes>
     </embeddable>
 
-    <embeddable class="org.dna.model.Feedback">
+    <embeddable class="org.dna.model.FeedbackSummary">
         <attributes>
             <basic name="count"/>
             <basic name="rank"/>
         </attributes>
     </embeddable>
+
+    <embeddable class="org.dna.model.Ability">
+        <attributes>
+            <basic name="name"/>
+        </attributes>
+    </embeddable>
+
+    <embeddable class="org.dna.model.Competence">
+        <attributes>
+            <basic name="name"/>
+            <basic name="votes"/>
+        </attributes>
+    </embeddable>
+
 </entity-mappings>

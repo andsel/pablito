@@ -1,19 +1,27 @@
 package org.dna.web.model;
 
+import org.dna.model.Ability;
+import org.dna.model.Competence;
 import org.dna.model.Tasker;
 
-import java.util.List;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
 /**
- * Created by andrea on 16/08/16.
+ * Tasker view model, wraps the model's Tasker.
  */
 public class TaskerView {
     private Tasker tasker;
+    private Set<Ability> leftSideAbilities = new HashSet<>();
+    private Set<Ability> rightSideAbilities = new HashSet<>();
 
     public TaskerView(Tasker tasker) {
         this.tasker = tasker;
+        List<Ability> tmpAbilities = new ArrayList<>(this.tasker.getAbilities());
+        int halfSize = (int) Math.ceil(tmpAbilities.size() / 2);
+        leftSideAbilities.addAll(tmpAbilities.subList(0, halfSize));
+        rightSideAbilities.addAll(tmpAbilities.subList(halfSize, tmpAbilities.size()));
     }
 
     public Long getId() {
@@ -46,6 +54,18 @@ public class TaskerView {
 
     public int getFeedbackRank() {
         return Math.max(0, (int) Math.round(Math.floor(this.tasker.getFeedback().getRank())) - 1);
+    }
+
+    public Set<Competence> getCompetences() {
+        return this.tasker.getCompetences();
+    }
+
+    public Set<Ability> getLeftSideAbilities() {
+        return leftSideAbilities;
+    }
+
+    public Set<Ability> getRightSideAbilities() {
+        return rightSideAbilities;
     }
 
     public static final List<TaskerView> toView(List<Tasker> taskers) {

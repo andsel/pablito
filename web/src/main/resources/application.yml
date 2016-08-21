@@ -8,6 +8,10 @@ spring:
   devtools:
     restart:
       exclude: /static/**, /templates/**, /public/**
+  #H2Console
+#  h2:
+#    console:
+#      enabled: true
 
 # To disable thymeleaf caching
 #spring:

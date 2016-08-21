@@ -1,15 +1,15 @@
 package org.dna.web.infrastructure;
 
-import org.dna.model.Feedback;
-import org.dna.model.SkillType;
-import org.dna.model.Tasker;
-import org.dna.model.TaskerRepository;
+import org.dna.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static java.lang.Math.random;
 import static java.lang.Math.round;
@@ -32,13 +32,23 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
         String[] greenKeepers = {"Mario", "Andrea", "Alessandro", "Marco", "Antonio", "Carlo", "Davide", "Italo",
                 "Enrico", "Federico", "Giacomo", "Luigi", "Mimmo"};
 
+        String[] abilities = {"Arieggiatura prato", "Potatura siepi e piccoli cespugli", "Piantumazione siepi e piccoli alberi",
+                "Potatura di mantenimento", "Attrezzatura propria", "Smaltimento sfalci", "Pacciamatura",
+                "Preparazione e semina del prato"};
+
         for (String taskerName : greenKeepers) {
             Tasker greenKeeper = new Tasker(taskerName, "Gardening", "Trento", "IT");
             greenKeeper.setPresentation("I have the passion for gardening and usually I cut the grass and take care of" +
                     "my friends gardens. I decided to use my passion to help other people gardens to shine. I'm able" +
                     "cut trees and have minimal landscape design abilities.");
             greenKeeper.addSkill(SkillType.GREENKEEPING);
-            greenKeeper.setFeedback(new Feedback((int)round(random() * 100), random() * 5));
+            greenKeeper.setFeedback(new FeedbackSummary((int)round(random() * 100), random() * 5));
+
+            Set<Ability> abilitiesForTasker = new HashSet<>();
+            while (abilitiesForTasker.size() < 6) {
+                abilitiesForTasker.add(new Ability(abilities[(int)(random() * abilities.length)]));
+            }
+            abilitiesForTasker.forEach(greenKeeper::addAbility);
             taskerRepository.save(greenKeeper);
         }
 

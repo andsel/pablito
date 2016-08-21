@@ -115,25 +115,30 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Services offered</h3>
+                    <h3 class="panel-title">Abilities</h3>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-5">
                         <ul class="list-group">
-                            <li class="list-group-item">Taglio prati</li>
-                            <li class="list-group-item">Arieggiatura prato</li>
-                            <li class="list-group-item">Potatura siepi e piccoli cespugli</li>
-                            <li class="list-group-item">Piantumazione siepi e piccoli alberi</li>
-                            <li class="list-group-item">Potatura di mantenimento</li>
+                            <li class="list-group-item" th:each="ability : ${tasker.leftSideAbilities}">
+                                <span th:text="${ability.name}"/>
+                            </li>
+                            <!--<li class="list-group-item">Arieggiatura prato</li>-->
+                            <!--<li class="list-group-item">Potatura siepi e piccoli cespugli</li>-->
+                            <!--<li class="list-group-item">Piantumazione siepi e piccoli alberi</li>-->
+                            <!--<li class="list-group-item">Potatura di mantenimento</li>-->
                         </ul>
                     </div>
 
                     <div class="col-md-5 col-md-offset-2">
                         <ul class="list-group">
-                            <li class="list-group-item">Attrezzatura propria</li>
-                            <li class="list-group-item">Smaltimento sfalci</li>
-                            <li class="list-group-item">Pacciamatura</li>
-                            <li class="list-group-item">Preparazione e semina del prato</li>
+                            <li class="list-group-item" th:each="ability : ${tasker.rightSideAbilities}">
+                                <span th:text="${ability.name}"/>
+                            </li>
+                            <!--<li class="list-group-item">Attrezzatura propria</li>-->
+                            <!--<li class="list-group-item">Smaltimento sfalci</li>-->
+                            <!--<li class="list-group-item">Pacciamatura</li>-->
+                            <!--<li class="list-group-item">Preparazione e semina del prato</li>-->
                         </ul>
                     </div>
                 </div>
@@ -145,7 +150,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span th:text="${tasker.name}"/></b> Feedback summary</h3>
+                    <h3 class="panel-title"><b><span th:text="${tasker.name}"/></b> Competenze</h3>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-5">

@@ -3,13 +3,13 @@ package org.dna.model;
 /**
  * Value Object
  */
-public class Feedback {
+public class FeedbackSummary {
     private int count;
     private double rank;
 
-    private Feedback() {}
+    private FeedbackSummary() {}
 
-    public Feedback(int count, double rank) {
+    public FeedbackSummary(int count, double rank) {
         this.count = count;
         this.rank = rank;
     }
