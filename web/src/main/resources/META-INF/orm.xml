@@ -24,7 +24,10 @@
                 <collection-table name="ABILITY"/>
             </element-collection>
             <element-collection name="competences" target-class="org.dna.model.Competence">
-                <collection-table name="COMPETENCE"/>
+                <collection-table name="COMPETENCE">
+                    <!--<join-column name="COMPETENCE_ID"/>-->
+                    <!--<foreign-key name="COMPETENCE_ID"/>-->
+                </collection-table>
             </element-collection>
 
             <embedded name="pendingOffers"/>
@@ -54,7 +57,9 @@
 
     <embeddable class="org.dna.model.Competence">
         <attributes>
-            <basic name="name"/>
+            <basic name="name">
+                <column nullable="false"/>
+            </basic>
             <basic name="votes"/>
         </attributes>
     </embeddable>

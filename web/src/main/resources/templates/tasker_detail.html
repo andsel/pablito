@@ -150,32 +150,40 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span th:text="${tasker.name}"/></b> Competenze</h3>
+                    <h3 class="panel-title"><b><span th:text="${tasker.name}"/></b> Competences</h3>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-5">
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <span class="badge">14</span>
-                                Flessibilità orario
+                            <li class="list-group-item" th:each="competence : ${tasker.leftSideCompetences}">
+                                <span class="badge" th:text="${competence.votes}"/>
+                                <span th:text="${competence.name}"/>
                             </li>
-                            <li class="list-group-item">
-                                <span class="badge">3</span>
-                                Puntualità
-                            </li>
+                            <!--<li class="list-group-item">-->
+                                <!--<span class="badge">14</span>-->
+                                <!--Flessibilità orario-->
+                            <!--</li>-->
+                            <!--<li class="list-group-item">-->
+                                <!--<span class="badge">3</span>-->
+                                <!--Puntualità-->
+                            <!--</li>-->
                         </ul>
                     </div>
 
                     <div class="col-md-5 col-md-offset-2">
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <span class="badge">4</span>
-                                Precisione
+                            <li class="list-group-item" th:each="competence : ${tasker.rightSideCompetences}">
+                                <span class="badge" th:text="${competence.votes}"/>
+                                <span th:text="${competence.name}"/>
                             </li>
-                            <li class="list-group-item">
-                                <span class="badge">5</span>
-                                Competenza
-                            </li>
+                            <!--<li class="list-group-item">-->
+                                <!--<span class="badge">4</span>-->
+                                <!--Precisione-->
+                            <!--</li>-->
+                            <!--<li class="list-group-item">-->
+                                <!--<span class="badge">5</span>-->
+                                <!--Competenza-->
+                            <!--</li>-->
                         </ul>
                     </div>
                 </div>

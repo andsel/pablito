@@ -15,6 +15,8 @@ public class TaskerView {
     private Tasker tasker;
     private Set<Ability> leftSideAbilities = new HashSet<>();
     private Set<Ability> rightSideAbilities = new HashSet<>();
+    private Set<Competence> leftSideCompetences = new HashSet<>();
+    private Set<Competence> rightSideCompetences = new HashSet<>();
 
     public TaskerView(Tasker tasker) {
         this.tasker = tasker;
@@ -22,6 +24,11 @@ public class TaskerView {
         int halfSize = (int) Math.ceil(tmpAbilities.size() / 2);
         leftSideAbilities.addAll(tmpAbilities.subList(0, halfSize));
         rightSideAbilities.addAll(tmpAbilities.subList(halfSize, tmpAbilities.size()));
+
+        List<Competence> tmpCompetences = new ArrayList<>(this.tasker.getCompetences());
+        halfSize = (int) Math.ceil(tmpCompetences.size() / 2);
+        leftSideCompetences.addAll(tmpCompetences.subList(0, halfSize));
+        rightSideCompetences.addAll(tmpCompetences.subList(halfSize, tmpCompetences.size()));
     }
 
     public Long getId() {
@@ -56,9 +63,9 @@ public class TaskerView {
         return Math.max(0, (int) Math.round(Math.floor(this.tasker.getFeedback().getRank())) - 1);
     }
 
-    public Set<Competence> getCompetences() {
-        return this.tasker.getCompetences();
-    }
+//    public Set<Competence> getCompetences() {
+//        return this.tasker.getCompetences();
+//    }
 
     public Set<Ability> getLeftSideAbilities() {
         return leftSideAbilities;
@@ -66,6 +73,14 @@ public class TaskerView {
 
     public Set<Ability> getRightSideAbilities() {
         return rightSideAbilities;
+    }
+
+    public Set<Competence> getLeftSideCompetences() {
+        return leftSideCompetences;
+    }
+
+    public Set<Competence> getRightSideCompetences() {
+        return rightSideCompetences;
     }
 
     public static final List<TaskerView> toView(List<Tasker> taskers) {

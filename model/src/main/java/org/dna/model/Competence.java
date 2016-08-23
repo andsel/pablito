@@ -10,8 +10,10 @@ package org.dna.model;
  * Value object
  */
 public class Competence {
-    private final String name;
-    private final int votes;
+    private String name;
+    private int votes;
+
+    private Competence() {}
 
     public Competence(String name, int votes) {
         this.name = name;

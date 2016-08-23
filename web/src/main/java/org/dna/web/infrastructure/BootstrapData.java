@@ -36,6 +36,8 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
                 "Potatura di mantenimento", "Attrezzatura propria", "Smaltimento sfalci", "Pacciamatura",
                 "Preparazione e semina del prato"};
 
+        String[] competences = {"Precisione", "Competenza", "Puntualità", "Flessibilità orario"};
+
         for (String taskerName : greenKeepers) {
             Tasker greenKeeper = new Tasker(taskerName, "Gardening", "Trento", "IT");
             greenKeeper.setPresentation("I have the passion for gardening and usually I cut the grass and take care of" +
@@ -44,11 +46,22 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
             greenKeeper.addSkill(SkillType.GREENKEEPING);
             greenKeeper.setFeedback(new FeedbackSummary((int)round(random() * 100), random() * 5));
 
+            //Add random abilities
             Set<Ability> abilitiesForTasker = new HashSet<>();
             while (abilitiesForTasker.size() < 6) {
                 abilitiesForTasker.add(new Ability(abilities[(int)(random() * abilities.length)]));
             }
             abilitiesForTasker.forEach(greenKeeper::addAbility);
+
+            //Add random competences
+            Set<Competence> competencesForTasker = new HashSet<>();
+            while (competencesForTasker.size() < 4) {
+                int randomCompetenceIdx = (int)(random() * competences.length);
+                int competenceVotes = (int)(random() * 20);
+                competencesForTasker.add(new Competence(competences[randomCompetenceIdx], competenceVotes));
+            }
+            competencesForTasker.forEach(greenKeeper::addCompetence);
+
             taskerRepository.save(greenKeeper);
         }
 
