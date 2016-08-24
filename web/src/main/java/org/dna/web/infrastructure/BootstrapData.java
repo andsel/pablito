@@ -8,7 +8,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static java.lang.Math.random;
@@ -38,6 +40,12 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
 
         String[] competences = {"Precisione", "Competenza", "Puntualità", "Flessibilità orario"};
 
+        Review[] reviews = {new Review("Lavoratore attento, puntuale. E' sempre stato disponibile anche lavori" +
+                "per cui non era specializzato portandoli a termine bene", 4.5),
+                new Review("Il lavoro svolto non era all'altezza delle aspettative, non molto cordiale", 2.0),
+                new Review("Lavoratore onesto senza lode e senza infamia, ma il suo lo sa fare", 3.8)
+        };
+
         for (String taskerName : greenKeepers) {
             Tasker greenKeeper = new Tasker(taskerName, "Gardening", "Trento", "IT");
             greenKeeper.setPresentation("I have the passion for gardening and usually I cut the grass and take care of" +
@@ -61,6 +69,12 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
                 competencesForTasker.add(new Competence(competences[randomCompetenceIdx], competenceVotes));
             }
             competencesForTasker.forEach(greenKeeper::addCompetence);
+
+            //Add some reviews
+            int numReviews = (int)(random() * reviews.length);
+            for (int i=0; i<numReviews; i++) {
+                greenKeeper.addReview(reviews[(int)(random() * reviews.length)]);
+            }
 
             taskerRepository.save(greenKeeper);
         }

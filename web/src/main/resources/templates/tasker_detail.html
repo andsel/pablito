@@ -96,8 +96,6 @@
                               aria-hidden="true"></span>
                     </span>
 
-
-
                     <span class="badge" th:text="${tasker.feedbackRank}"></span>
 
                     <!--<div sec:authorize="isAuthenticated()">-->
@@ -191,36 +189,37 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-4 col-md-2 col-md-offset-1">
-            <a href="#" class="thumbnail">
-                <img data-holder-rendered="true"
-                     src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTU1YWFmMTk3OTMgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTVhYWYxOTc5MyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MSIgeT0iOTQuOCI+MTcxeDE4MDwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="
-                     style="height: 180px; width: 100%; display: block;" data-src="holder.js/100%x180" alt="100%x180"/>
-            </a>
-        </div>
-        <div class="col-md-8">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><a href="#details_Gianna"><b>Gianna</b></a></h3>
-                </div>
-                <div class="panel-body">
-                    Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
-                    parturient montes, nasc20 euro / oraetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-                </div>
-                <div class="panel-footer">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                </div>
-            </div>
-        </div>
-        <!--<div class="col-md-2"></div>-->
-    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-xs-4 col-md-2 col-md-offset-1">-->
+            <!--<a href="#" class="thumbnail">-->
+                <!--<img data-holder-rendered="true"-->
+                     <!--src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTU1YWFmMTk3OTMgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTVhYWYxOTc5MyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MSIgeT0iOTQuOCI+MTcxeDE4MDwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="-->
+                     <!--style="height: 180px; width: 100%; display: block;" data-src="holder.js/100%x180" alt="100%x180"/>-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--<div class="col-md-8">-->
+            <!--<div class="panel panel-info">-->
+                <!--<div class="panel-heading">-->
+                    <!--<h3 class="panel-title"><a href="#details_Gianna"><b>Gianna</b></a></h3>-->
+                <!--</div>-->
+                <!--<div class="panel-body">-->
+                    <!--Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis-->
+                    <!--parturient montes, nasc20 euro / oraetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.-->
+                <!--</div>-->
+                <!--<div class="panel-footer">-->
+                    <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                    <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                    <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                    <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                    <!--<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+    <!--</div>-->
 
-    <div class="row">
+    <!--<div class="row">-->
+    <div class="row" th:each="review : ${tasker.reviews}">
         <div class="col-xs-4 col-md-2 col-md-offset-1">
             <a href="#" class="thumbnail">
                 <img data-holder-rendered="true"
@@ -233,16 +232,29 @@
                 <div class="panel-heading">
                     <h3 class="panel-title"><a href="#details_Pino"><b>Pino</b></a></h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" th:text="${review.comment}">
                     Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
                     parturient montes, nasc20 euro / oraetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
                 </div>
                 <div class="panel-footer">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                    <span th:if="${review.rank gt 0 and review.rank lt 5}">
+                        <span th:each="pageNo : ${#numbers.sequence(1, review.rank)}"
+                              class="glyphicon glyphicon-star"
+                              aria-hidden="true"></span>
+                        <span th:each="pageNo : ${#numbers.sequence(review.rank + 1, 5)}"
+                              class="glyphicon glyphicon-star-empty"
+                              aria-hidden="true"></span>
+                    </span>
+                    <span th:if="${review.rank eq 0}">
+                        <span th:each="pageNo : ${#numbers.sequence(1, 5)}"
+                              class="glyphicon glyphicon-star-empty"
+                              aria-hidden="true"></span>
+                    </span>
+                    <span th:if="${review.rank eq 5}">
+                        <span th:each="pageNo : ${#numbers.sequence(1, 5)}"
+                              class="glyphicon glyphicon-star"
+                              aria-hidden="true"></span>
+                    </span>
                 </div>
             </div>
         </div>

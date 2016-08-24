@@ -4,7 +4,10 @@ import org.dna.model.Ability;
 import org.dna.model.Competence;
 import org.dna.model.Tasker;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -17,6 +20,7 @@ public class TaskerView {
     private Set<Ability> rightSideAbilities = new HashSet<>();
     private Set<Competence> leftSideCompetences = new HashSet<>();
     private Set<Competence> rightSideCompetences = new HashSet<>();
+    private final List<ReviewView> reviews;
 
     public TaskerView(Tasker tasker) {
         this.tasker = tasker;
@@ -29,6 +33,9 @@ public class TaskerView {
         halfSize = (int) Math.ceil(tmpCompetences.size() / 2);
         leftSideCompetences.addAll(tmpCompetences.subList(0, halfSize));
         rightSideCompetences.addAll(tmpCompetences.subList(halfSize, tmpCompetences.size()));
+
+        //wrap the Reviews
+        this.reviews = this.tasker.getReviews().stream().map(ReviewView::new).collect(toList());
     }
 
     public Long getId() {
@@ -63,10 +70,6 @@ public class TaskerView {
         return Math.max(0, (int) Math.round(Math.floor(this.tasker.getFeedback().getRank())) - 1);
     }
 
-//    public Set<Competence> getCompetences() {
-//        return this.tasker.getCompetences();
-//    }
-
     public Set<Ability> getLeftSideAbilities() {
         return leftSideAbilities;
     }
@@ -77,6 +80,10 @@ public class TaskerView {
 
     public Set<Competence> getLeftSideCompetences() {
         return leftSideCompetences;
+    }
+
+    public List<ReviewView> getReviews() {
+        return this.reviews;
     }
 
     public Set<Competence> getRightSideCompetences() {

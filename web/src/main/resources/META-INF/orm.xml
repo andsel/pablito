@@ -24,10 +24,10 @@
                 <collection-table name="ABILITY"/>
             </element-collection>
             <element-collection name="competences" target-class="org.dna.model.Competence">
-                <collection-table name="COMPETENCE">
-                    <!--<join-column name="COMPETENCE_ID"/>-->
-                    <!--<foreign-key name="COMPETENCE_ID"/>-->
-                </collection-table>
+                <collection-table name="COMPETENCE"/>
+            </element-collection>
+            <element-collection name="reviews" target-class="org.dna.model.Review">
+                <collection-table name="REVIEW"/>
             </element-collection>
 
             <embedded name="pendingOffers"/>
@@ -58,9 +58,19 @@
     <embeddable class="org.dna.model.Competence">
         <attributes>
             <basic name="name">
+                <!-- Needed to bring the name in the table key -->
                 <column nullable="false"/>
             </basic>
             <basic name="votes"/>
+        </attributes>
+    </embeddable>
+
+    <embeddable class="org.dna.model.Review">
+        <attributes>
+            <basic name="comment">
+                <column nullable="false"/>
+            </basic>
+            <basic name="rank"/>
         </attributes>
     </embeddable>
 

@@ -16,6 +16,7 @@ public class Tasker {
     private final List<TaskOffer> pendingOffers = new ArrayList<>();
     private final Set<Competence> competences = new HashSet<>();
     private final Set<Ability> abilities = new HashSet<>();
+    private final List<Review> reviews = new ArrayList<>();
 
     private FeedbackSummary feedback = new FeedbackSummary(0, 0.0);
 
@@ -82,6 +83,14 @@ public class Tasker {
 
     public Set<Ability> getAbilities() {
         return abilities;
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
     }
 
     public boolean hasSkill(SkillType desiredSkill) {
