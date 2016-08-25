@@ -41,8 +41,8 @@ public class TaskerRepositoryImpl implements TaskerRepository {
     }
 
     @Override
-    public Tasker getByID(long possibleTasker) {
-        return this.taskerDAO.getOne(possibleTasker);
+    public Tasker getByID(long taskerId) {
+        return this.taskerDAO.getOne(taskerId);
     }
 
     @Override

@@ -2,10 +2,14 @@ package org.dna.model;
 
 public class TaskOffer {
     private long taskRequesterId;
-    final SkillType skill;
+    SkillType skill;
+    private String description;
 
-    public TaskOffer(SkillType skill) {
+    private TaskOffer() {}
+
+    public TaskOffer(SkillType skill, String description) {
         this.skill = skill;
+        this.description = description;
     }
 
     void requestedBy(long requester) {

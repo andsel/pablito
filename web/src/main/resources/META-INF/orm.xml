@@ -6,6 +6,18 @@
                     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <description>Pablito XML JPA mappings</description>
     <package>org.dna.model</package>
+    <entity class="org.dna.model.TaskBidder" name="TaskBidder" access="FIELD">
+        <table name="BIDDER"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="login"/>
+            <basic name="rank"/>
+            <basic name="zone"/>
+        </attributes>
+    </entity>
+
     <entity class="org.dna.model.Tasker" name="Tasker" access="FIELD">
         <table name="TASKER"/>
         <attributes>
@@ -29,8 +41,11 @@
             <element-collection name="reviews" target-class="org.dna.model.Review">
                 <collection-table name="REVIEW"/>
             </element-collection>
+            <element-collection name="pendingOffers" target-class="org.dna.model.TaskOffer">
+                <collection-table name="PENDING_OFFER"/>
+            </element-collection>
 
-            <embedded name="pendingOffers"/>
+            <!--<embedded name="pendingOffers"/>-->
             <embedded name="feedback"/>
         </attributes>
     </entity>
@@ -39,6 +54,7 @@
         <attributes>
             <basic name="taskRequesterId"/>
             <basic name="skill"/>
+            <basic name="description"/>
         </attributes>
     </embeddable>
 

@@ -1,5 +1,9 @@
 package org.dna;
 
+import org.dna.model.BidderRepository;
+import org.dna.model.TaskerRepository;
+import org.dna.web.infrastructure.CustomUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,8 +22,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 @EnableWebSecurity
-//@Order(SecurityProperties.BASIC_AUTH_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    TaskerRepository taskerRepository;
+
+    @Autowired
+    BidderRepository bidderRepository;
 
     @Bean
     public AuthenticationSuccessHandler successHandler() {
@@ -58,8 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //just for dev test
-        auth.inMemoryAuthentication()
-                .withUser("requester").password("pwd").roles("REQUESTER").and()
-                .withUser("tasker").password("pwd").roles("TASKER");
+//        auth.inMemoryAuthentication()
+//                .withUser("requester").password("pwd").roles("REQUESTER").and()
+//                .withUser("tasker").password("pwd").roles("TASKER");
+        auth.userDetailsService(new CustomUserService(this.taskerRepository, this.bidderRepository));
     }
 }

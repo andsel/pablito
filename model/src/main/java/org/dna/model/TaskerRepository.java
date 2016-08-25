@@ -8,7 +8,7 @@ public interface TaskerRepository {
 
     long countAllBySkillsAndLocation(Set<SkillType> desiredSkills, String location);
 
-    Tasker getByID(long possibleTasker);
+    Tasker getByID(long taskerId);
 
     Tasker save(Tasker tasker);
 }

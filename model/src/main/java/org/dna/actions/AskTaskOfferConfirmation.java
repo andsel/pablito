@@ -3,10 +3,10 @@ package org.dna.actions;
 import org.dna.model.*;
 
 public class AskTaskOfferConfirmation {
-    private final BiddersRepository biddersRepo;
+    private final BidderRepository biddersRepo;
     private TaskerRepository taskersRepo;
 
-    public AskTaskOfferConfirmation(BiddersRepository biddersRepo) {
+    public AskTaskOfferConfirmation(BidderRepository biddersRepo) {
         this.biddersRepo = biddersRepo;
     }
 

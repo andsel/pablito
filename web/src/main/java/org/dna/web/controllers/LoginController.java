@@ -1,9 +1,7 @@
 package org.dna.web.controllers;
 
-import org.dna.model.SkillType;
-import org.dna.model.TaskOffer;
-import org.dna.model.Tasker;
-import org.dna.model.TaskerRepository;
+import org.dna.model.*;
+import org.dna.web.model.CustomUser;
 import org.dna.web.model.TaskerHireRequest;
 import org.dna.web.model.TaskerView;
 import org.slf4j.Logger;
@@ -13,12 +11,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +36,9 @@ public class LoginController {
 
     @Autowired
     TaskerRepository taskerRepository;
+
+//    @Autowired
+//    BidderRepository biddersRepository;
 
     @RequestMapping(value = "/")
     public String index() {
@@ -99,12 +102,13 @@ public class LoginController {
 
     @RequestMapping(value = "/tasker/hire", method = RequestMethod.POST)
     public String hireSubmit(@RequestParam("taskerId") long taskerId,
-                             @ModelAttribute TaskerHireRequest taskHire,
-                             Model model) {
-        LOG.info("taskHire {}", taskHire);
+                             @ModelAttribute TaskerHireRequest taskerHireRequest,
+                             Model model, Authentication authentication) {
+        LOG.info("taskHire {}", taskerHireRequest);
         Tasker tasker = this.taskerRepository.getByID(taskerId);
-        TaskOffer offer = new TaskOffer(SkillType.GREENKEEPING); //TODO read from TaskerHireRequest
-        tasker.postTaskRequest(offer, 1L); //TODO load the id from the session user
+        TaskOffer offer = new TaskOffer(SkillType.GREENKEEPING, taskerHireRequest.getDescription());
+        CustomUser userDetails = (CustomUser) authentication.getPrincipal();
+        tasker.postTaskRequest(offer, userDetails.getEntityId());
         this.taskerRepository.save(tasker);
         return "redirect:/search";
     }

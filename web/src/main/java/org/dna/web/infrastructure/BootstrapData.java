@@ -8,9 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static java.lang.Math.random;
@@ -26,6 +24,9 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
 
     @Autowired
     private TaskerRepository taskerRepository;
+
+    @Autowired
+    private BidderRepository bidderRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -85,6 +86,11 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
                 "in my family to get engaged in this field. I'm able to repair the tubes, install and fix heating boilers" +
                 "and do minimal mural jobs.");
         taskerRepository.save(plumber);
+
+        //Populate the bidders
+        TaskBidder bidderMarco = new TaskBidder("Requester", "Trento", 3.0);
+        bidderRepository.save(bidderMarco);
+
         LOG.debug("Finished populate bootstrap data");
     }
 }
