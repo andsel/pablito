@@ -85,31 +85,4 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/tasker/{taskerId}/details")
-    public String detail(@PathVariable("taskerId") long taskerId, Model model) {
-        Tasker tasker = this.taskerRepository.getByID(taskerId);
-        model.addAttribute("tasker", new TaskerView(tasker));
-        return "tasker_detail";
-    }
-
-    @RequestMapping(value = "/tasker/{taskerId}/hire", method = RequestMethod.GET)
-    public String hireForm(@PathVariable("taskerId") long taskerId, Model model) {
-        Tasker tasker = this.taskerRepository.getByID(taskerId);
-        model.addAttribute("tasker", tasker);
-        model.addAttribute("hireRequest", new TaskerHireRequest());
-        return "hire_tasker";
-    }
-
-    @RequestMapping(value = "/tasker/hire", method = RequestMethod.POST)
-    public String hireSubmit(@RequestParam("taskerId") long taskerId,
-                             @ModelAttribute TaskerHireRequest taskerHireRequest,
-                             Model model, Authentication authentication) {
-        LOG.info("taskHire {}", taskerHireRequest);
-        Tasker tasker = this.taskerRepository.getByID(taskerId);
-        TaskOffer offer = new TaskOffer(SkillType.GREENKEEPING, taskerHireRequest.getDescription());
-        CustomUser userDetails = (CustomUser) authentication.getPrincipal();
-        tasker.postTaskRequest(offer, userDetails.getEntityId());
-        this.taskerRepository.save(tasker);
-        return "redirect:/search";
-    }
 }
