@@ -5,15 +5,11 @@ import org.dna.model.TaskBidder;
 import org.dna.model.Tasker;
 import org.dna.model.TaskerRepository;
 import org.dna.web.model.CustomUser;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.StringUtils;
-
-import java.util.Arrays;
 
 import static org.codehaus.groovy.runtime.InvokerHelper.asList;
 
