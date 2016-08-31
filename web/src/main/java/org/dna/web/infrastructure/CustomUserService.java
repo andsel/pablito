@@ -42,7 +42,7 @@ public class CustomUserService implements UserDetailsService {
             if (tasker == null) {
                 throw new UsernameNotFoundException("User '" + username + "' not found.");
             }
-            authority = "TASKER";
+            authority = "ROLE_TASKER";
         }
         if (username.startsWith("requester")) {
             id = Long.parseLong(username.split("requester")[1]);
@@ -50,7 +50,7 @@ public class CustomUserService implements UserDetailsService {
             if (bidder == null) {
                 throw new UsernameNotFoundException("User '" + username + "' not found.");
             }
-            authority = "REQUESTER";
+            authority = "ROLE_REQUESTER";
         }
 
         if (StringUtils.isEmpty(authority)) {

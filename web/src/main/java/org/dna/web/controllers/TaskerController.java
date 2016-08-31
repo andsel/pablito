@@ -55,4 +55,15 @@ public class TaskerController {
         this.taskerRepository.save(tasker);
         return "redirect:/search";
     }
+
+    @RequestMapping(value = "/tasker/requests", method = RequestMethod.GET)
+    public String listRequests(Model model, Authentication authentication) {
+        CustomUser userDetails = (CustomUser) authentication.getPrincipal();
+        LOG.info("listRequests for user {}", userDetails);
+        Tasker tasker = this.taskerRepository.getByID(userDetails.getEntityId());
+        model.addAttribute("tasker", tasker);
+        model.addAttribute("pendingRequests", tasker.pendingRequests());
+        model.addAttribute("countRequests", tasker.pendingRequests().size());
+        return "tasker_requests";
+    }
 }

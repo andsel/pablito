@@ -55,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout")
             .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/tasker/hire").authenticated() //.hasRole("REQUESTER")
+                .antMatchers(HttpMethod.POST, "/tasker/hire").hasRole("REQUESTER")//.authenticated()
+                .antMatchers("/tasker/requests").hasRole("TASKER")
                 .anyRequest().permitAll();
 
         //WARN only in Dev mode
@@ -68,8 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //just for dev test
 //        auth.inMemoryAuthentication()
-//                .withUser("requester").password("pwd").roles("REQUESTER").and()
-//                .withUser("tasker").password("pwd").roles("TASKER");
+//                .withUser("requester").password("pwd").roles("ROLE_REQUESTER").and()
+//                .withUser("tasker").password("pwd").roles("ROLE_TASKER");
         auth.userDetailsService(new CustomUserService(this.taskerRepository, this.bidderRepository));
     }
 }

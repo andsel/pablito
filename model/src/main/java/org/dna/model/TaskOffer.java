@@ -12,6 +12,10 @@ public class TaskOffer {
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     void requestedBy(long requester) {
         this.taskRequesterId = requester;
     }

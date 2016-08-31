@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +42,14 @@ public class LoginController {
 //    BidderRepository biddersRepository;
 
     @RequestMapping(value = "/")
-    public String index() {
+    public String index(Model model, Authentication authentication) {
+        if (authentication != null) {
+            //a user sign in
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TASKER"))) {
+                //a tasker logged in, redirect to pending offer requests list
+                return "redirect:/tasker/requests";
+            }
+        }
         return "index";
     }
 
