@@ -41,20 +41,38 @@
             <element-collection name="reviews" target-class="org.dna.model.Review">
                 <collection-table name="REVIEW"/>
             </element-collection>
-            <element-collection name="pendingOffers" target-class="org.dna.model.TaskOffer">
-                <collection-table name="PENDING_OFFER"/>
-            </element-collection>
+            <!--<element-collection name="pendingOffers" target-class="org.dna.model.TaskOffer">-->
+                <!--<collection-table name="PENDING_OFFER"/>-->
+            <!--</element-collection>-->
 
             <!--<embedded name="pendingOffers"/>-->
             <embedded name="feedback"/>
         </attributes>
     </entity>
 
-    <embeddable class="org.dna.model.TaskOffer">
+    <entity class="org.dna.model.TaskOffer" name="TaskOffer" access="FIELD">
+        <table name="OFFER"/>
         <attributes>
-            <basic name="taskRequesterId"/>
+            <id name="id">
+                <generated-value strategy="AUTO"/>
+            </id>
             <basic name="skill"/>
-            <basic name="description"/>
+            <one-to-one name="worker" fetch="LAZY">
+                <join-column name="TASKER_ID"/>
+            </one-to-one>
+            <one-to-one name="bidder" fetch="LAZY">
+                <join-column name="BIDDER_ID"/>
+            </one-to-one>
+            <element-collection name="chat" target-class="org.dna.model.Message">
+                <collection-table name="OFFER_MESSAGE"/>
+            </element-collection>
+        </attributes>
+    </entity>
+
+    <embeddable class="org.dna.model.Message">
+        <attributes>
+            <basic name="text"/>
+            <basic name="createdOn"/>
         </attributes>
     </embeddable>
 

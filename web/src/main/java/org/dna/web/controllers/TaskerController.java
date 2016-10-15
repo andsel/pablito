@@ -1,9 +1,7 @@
 package org.dna.web.controllers;
 
-import org.dna.model.SkillType;
-import org.dna.model.TaskOffer;
-import org.dna.model.Tasker;
-import org.dna.model.TaskerRepository;
+import org.dna.actions.CreateOffer;
+import org.dna.model.*;
 import org.dna.web.model.CustomUser;
 import org.dna.web.model.TaskerHireRequest;
 import org.dna.web.model.TaskerView;
@@ -14,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller responsible for the Tasker entity.
@@ -27,6 +27,12 @@ public class TaskerController {
 
     @Autowired
     TaskerRepository taskerRepository;
+
+    @Autowired
+    TaskOfferRepository taskOfferRepository;
+
+    @Autowired
+    protected CreateOffer createOfferAction;
 
     @RequestMapping(value = "/tasker/{taskerId}/details")
     public String detail(@PathVariable("taskerId") long taskerId, Model model) {
@@ -48,11 +54,10 @@ public class TaskerController {
                              @ModelAttribute TaskerHireRequest taskerHireRequest,
                              Model model, Authentication authentication) {
         LOG.info("taskHire {}", taskerHireRequest);
-        Tasker tasker = this.taskerRepository.getByID(taskerId);
-        TaskOffer offer = new TaskOffer(SkillType.GREENKEEPING, taskerHireRequest.getDescription());
         CustomUser userDetails = (CustomUser) authentication.getPrincipal();
-        tasker.postTaskRequest(offer, userDetails.getEntityId());
-        this.taskerRepository.save(tasker);
+        final long requesterId = userDetails.getEntityId();
+        createOfferAction.postTaskRequest(taskerId, requesterId, taskerHireRequest.getDescription());
+
         return "redirect:/search";
     }
 
@@ -62,8 +67,10 @@ public class TaskerController {
         LOG.info("listRequests for user {}", userDetails);
         Tasker tasker = this.taskerRepository.getByID(userDetails.getEntityId());
         model.addAttribute("tasker", tasker);
-        model.addAttribute("pendingRequests", tasker.pendingRequests());
-        model.addAttribute("countRequests", tasker.pendingRequests().size());
+
+        List<TaskOffer> pendingRequests = this.taskOfferRepository.pendingRequests(tasker);
+        model.addAttribute("pendingRequests", pendingRequests);
+        model.addAttribute("countRequests", pendingRequests.size());
         return "tasker_requests";
     }
 }

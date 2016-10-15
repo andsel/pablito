@@ -13,7 +13,6 @@ public class Tasker {
     private String nation;
     private String presentation;
     private Set<SkillType> skills = new HashSet<>();
-    private final List<TaskOffer> pendingOffers = new ArrayList<>();
     private final Set<Competence> competences = new HashSet<>();
     private final Set<Ability> abilities = new HashSet<>();
     private final List<Review> reviews = new ArrayList<>();
@@ -95,17 +94,5 @@ public class Tasker {
 
     public boolean hasSkill(SkillType desiredSkill) {
         return this.skills.contains(desiredSkill);
-    }
-
-    public void postTaskRequest(TaskOffer offer, long taskRequesterId) {
-        if (!hasSkill(offer.skill)) {
-            return;
-        }
-        offer.requestedBy(taskRequesterId);
-        pendingOffers.add(offer);
-    }
-
-    public List<TaskOffer> pendingRequests() {
-        return new ArrayList<>(pendingOffers);
     }
 }

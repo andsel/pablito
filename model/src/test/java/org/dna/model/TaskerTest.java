@@ -16,23 +16,6 @@ public class TaskerTest {
     }
 
     @Test
-    public void testRequestForTask() {
-        TaskOffer offer = new TaskOffer(SkillType.GREENKEEPING, "Grass cutting");
-        sut.postTaskRequest(offer, 1L);
-
-        assertEquals(1, sut.pendingRequests().size());
-    }
-
-    @Test
-    public void testCantRequestForTaskWithoutMatchingSkill() {
-        TaskOffer offer = new TaskOffer(SkillType.PLUMBING, "Grass cutting");
-        sut.postTaskRequest(offer, 1L);
-
-        assertTrue("A PLUMBING tasker can't be presented with requesting GREENKEEPING skills",
-                sut.pendingRequests().isEmpty());
-    }
-
-    @Test
     public void testSkills() {
         assertTrue(sut.hasSkill(SkillType.GREENKEEPING));
         assertFalse(sut.hasSkill(SkillType.PLUMBING));
