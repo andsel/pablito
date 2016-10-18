@@ -5,12 +5,14 @@ import org.dna.model.TaskerRepository;
 import org.dna.web.infrastructure.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
@@ -29,6 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     BidderRepository bidderRepository;
+
+    @Autowired
+    UserDetailsService customUserService;
 
     @Bean
     public AuthenticationSuccessHandler successHandler() {
@@ -71,6 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.inMemoryAuthentication()
 //                .withUser("requester").password("pwd").roles("ROLE_REQUESTER").and()
 //                .withUser("tasker").password("pwd").roles("ROLE_TASKER");
-        auth.userDetailsService(new CustomUserService(this.taskerRepository, this.bidderRepository));
+        auth.userDetailsService(this.customUserService);
     }
 }
