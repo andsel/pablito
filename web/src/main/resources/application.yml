@@ -2,6 +2,8 @@ security:
   user:
     password: password
 
+#hibernate:
+#  enable_lazy_load_no_trans: true
 
 # Dev config
 spring:

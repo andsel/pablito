@@ -88,8 +88,10 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
         taskerRepository.save(plumber);
 
         //Populate the bidders
-        TaskBidder bidderMarco = new TaskBidder("Requester", "Trento", 3.0);
+        TaskBidder bidderMarco = new TaskBidder("Marco", "Trento", 3.0);
         bidderRepository.save(bidderMarco);
+        TaskBidder bidderPablo = new TaskBidder("Pablo", "Trento", 3.0);
+        bidderRepository.save(bidderPablo);
 
         LOG.debug("Finished populate bootstrap data");
     }
