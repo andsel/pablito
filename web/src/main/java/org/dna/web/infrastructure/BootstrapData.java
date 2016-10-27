@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,9 +41,12 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
     @Autowired
     private BidderRepository bidderRepository;
 
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    @Autowired
+    private TaskOfferRepository offerRepository;
 
+    @Override
+    @Transactional
+    public void onApplicationEvent(ContextRefreshedEvent event) {
         LOG.debug("Populating bootstrap data");
         //stores 12 greenkeepers
         String[] greenKeepers = {"Mario", "Andrea", "Alessandro", "Marco", "Antonio", "Carlo", "Davide", "Italo",
@@ -75,6 +79,16 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
         bidderRepository.save(bidderMarco);
         TaskBidder bidderPablo = new TaskBidder("Pablo", "Trento", 3.0);
         bidderRepository.save(bidderPablo);
+
+        //create a couple of TaskOffer for some Tasker
+        Tasker gardenWorker1 = taskerRepository.getByID(1L); //The first tasker
+        TaskOffer grassCutting = new TaskOffer(SkillType.GREENKEEPING, "Taglio erba bla bla", gardenWorker1, bidderMarco);
+        grassCutting.messageToBidder("Message from " + gardenWorker1.getName() + " bla bla");
+        grassCutting.messageToWorker("Message from Marco bidder bla bla");
+        offerRepository.save(grassCutting);
+
+        TaskOffer treeCutting = new TaskOffer(SkillType.GREENKEEPING, "Potatura alberi", gardenWorker1, bidderPablo);
+        offerRepository.save(treeCutting);
 
         LOG.debug("Finished populate bootstrap data");
     }

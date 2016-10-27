@@ -17,6 +17,11 @@ public class TaskOfferRepositoryImpl implements TaskOfferRepository {
     }
 
     @Override
+    public TaskOffer getByID(long offerId) {
+        return this.taskOfferDAO.getOne(offerId);
+    }
+
+    @Override
     public TaskOffer save(TaskOffer offer) {
         return this.taskOfferDAO.save(offer);
     }

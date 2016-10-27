@@ -73,6 +73,7 @@
         <attributes>
             <basic name="text"/>
             <basic name="createdOn"/>
+            <basic name="direction"/>
         </attributes>
     </embeddable>
 

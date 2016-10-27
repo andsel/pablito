@@ -20,4 +20,8 @@ public class TaskBidder {
     public Long getId() {
         return id;
     }
+
+    public String getLogin() {
+        return login;
+    }
 }

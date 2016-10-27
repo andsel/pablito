@@ -25,7 +25,13 @@
             <!--</div>-->
             <div class="panel-body">
                 <span th:text="${pendingRequest.description}"/>
-                <!--<a class="btn btn-default" href="tasker_detail.html"-->
+                <a class="btn btn-default" href="request_detail.html"
+                   th:href="@{/offer/{offerId}/details(offerId=${pendingRequest.id})}"
+                   role="button">
+                    <b>...</b>
+                </a>
+
+                <!--<a class="btn btn-default" href="request_detail.html"-->
                    <!--th:href="@{/tasker/{taskerId}/details(taskerId=${tasker.id})}"-->
                    <!--role="button">...</a>-->
             </div>

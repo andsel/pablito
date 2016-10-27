@@ -38,9 +38,6 @@ public class LoginController {
     @Autowired
     TaskerRepository taskerRepository;
 
-//    @Autowired
-//    BidderRepository biddersRepository;
-
     @RequestMapping(value = "/")
     public String index(Model model, Authentication authentication) {
         if (authentication != null) {

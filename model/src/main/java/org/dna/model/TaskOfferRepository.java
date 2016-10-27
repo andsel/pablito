@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface TaskOfferRepository {
 
-    TaskOffer save(TaskOffer tasker);
+    TaskOffer getByID(long offerId);
+
+    TaskOffer save(TaskOffer offer);
 
     List<TaskOffer> pendingRequests(Tasker tasker);
 }
